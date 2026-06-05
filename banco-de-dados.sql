@@ -1,8 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS FEATURE_STORE;
 SET search_path TO FEATURE_STORE;
 
--- 1. ESTRUTURA DAS TABELAS
-
 CREATE TABLE users ( 
     id_users SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL, 
@@ -40,14 +38,11 @@ ALTER TABLE log_acesso
 ADD CONSTRAINT check_tipo_acesso 
 CHECK (tipo_acesso IN ('VIEW', 'DOWNLOAD'));
 
--- 2. PREENCHIMENTO DOS ATRIBUTOS (POPULAÇÃO)
-
 INSERT INTO users (nome, email, senha) VALUES
 ('Ana Silva', 'ana.silva@feature.com', 'hash_123'),
 ('Bruno Costa', 'bruno.c@feature.com', 'hash_456'),
 ('Carla Souza', 'carla.s@feature.com', 'hash_789');
 
--- Inserindo com a nova coluna origem_fonte
 INSERT INTO datasets (id_criador, descricao, origem_fonte, data_hora_datasets) VALUES
 (1, 'Dataset de Previsão de Churn - Telecom', 'CRM Interno', '2026-05-01 09:00:00'),
 (2, 'Features de Fraude em Cartão de Crédito', 'API Gateway Pagamentos', '2026-05-02 14:30:00'),
